@@ -24,9 +24,33 @@
 4. **Generate Domain** ในหน้า Settings > Networking
 5. Railway จะ auto-deploy และสร้าง public URL
 
+### วิธีหา Public URL ใน Railway:
+
+**วิธีที่ 1: ใน Project Dashboard**
+1. ไปที่ project หลักของคุณ
+2. คลิกที่ service ที่ deploy แล้ว
+3. ดูที่ service card จะมี URL แสดงอยู่
+4. หรือคลิก "Open App" ถ้ามีปุ่มนี้
+
+**วิธีที่ 2: ใน Service Settings**
+1. เข้าไปใน service ที่ deploy
+2. ไปที่ Settings tab
+3. หาส่วน "Public Networking" หรือ "Domains"
+4. คลิก "Generate Domain" ถ้ายังไม่มี
+
+**วิธีที่ 3: ใน Deployment Tab**
+1. เข้าไป Deployments tab
+2. คลิกที่ deployment ล่าสุด
+3. ใน deployment details จะมี URL แสดง
+
+**วิธีที่ 4: ถ้ายังไม่มี Public URL**
+1. ที่หน้า service หลัก
+2. มองหาปุ่ม "Add Public Domain" หรือ "Enable Public Access"
+3. Railway จะ auto-generate URL ให้
+
 ### หมายเหตุสำคัญ:
 - URL `*.railway.internal` เป็น internal URL ไม่สามารถเข้าถึงจากภายนอกได้
-- ต้องใช้ public domain ที่ Railway generate ให้ (แบบ `*.up.railway.app`)
+- Public URL จะเป็นแบบ `*.up.railway.app`
 - หรือตั้งค่า custom domain ของตัวเอง
 
 ### 4. การตั้งค่าเพิ่มเติม

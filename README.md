@@ -1,141 +1,167 @@
-# BergDotBet B.B Admin Panel
+# BergDotBet Admin Panel
 
-ระบบจัดการแอดมินที่ครบครันสำหรับ BergDotBet B.B พร้อมฟีเจอร์การจัดการผู้ใช้ ระบบกระเป๋าเงิน โซเชียลมีเดีย และระบบจัดการร้านค้า
+A comprehensive multi-feature admin panel for BergDotBet with user management, credit system, social media features, and pet-based ecosystem.
 
-## คุณสมบัติหลัก
+## Features
 
-- 🔐 ระบบ Authentication และ Authorization
-- 👥 จัดการผู้ใช้และสิทธิ์การเข้าถึง
-- 💰 ระบบกระเป๋าเงินและธุรกรรมเครดิต
-- 📱 โซเชียลมีเดียและระบบแชท
-- 🛒 ระบบจัดการร้านค้าและไอเทม
-- 🐾 ระบบสัตว์เลี้ยงเสมือน
-- 📊 แดชบอร์ดแอดมินและสถิติ
+### Core Systems
+- **User Management** - Complete admin panel for user registration, authentication, and role management
+- **Credit Wallet System** - Digital wallet with transactions, transfers, and balance management
+- **Social Media Platform** - Posts, comments, likes/dislikes system
+- **Chat & Messaging** - Real-time messaging system with private and public rooms
+- **Loan Request System** - Credit loan applications with approval workflow
+- **Shop & Items** - Virtual item store with inventory management
+- **Virtual Pet System** - Pet care simulation with rewards
 
-## เทคโนโลยีที่ใช้
+### Technical Stack
+- **Frontend**: React + TypeScript + Tailwind CSS + Vite
+- **Backend**: Express.js + Node.js
+- **Database**: PostgreSQL (Supabase)
+- **ORM**: Drizzle ORM
+- **Authentication**: Session-based auth with bcrypt
+- **Deployment**: Railway, Vercel ready
 
-- **Frontend**: React 18, TypeScript, Tailwind CSS, Shadcn/UI
-- **Backend**: Node.js, Express.js, TypeScript
-- **Database**: PostgreSQL/Supabase with Drizzle ORM
-- **Authentication**: Session-based authentication
-- **State Management**: TanStack Query (React Query)
-- **Form Management**: React Hook Form with Zod validation
-- **Routing**: Wouter
-- **Deployment**: Vercel
+## Quick Start
 
-## การติดตั้งและรัน
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database (Supabase recommended)
 
-### ข้อกำหนดเบื้องต้น
+### Installation
 
-- Node.js 18+ 
-- PostgreSQL หรือ Supabase database
-- npm หรือ yarn
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd bergdotbet-admin-panel
+   ```
 
-### การติดตั้ง
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-1. Clone repository:
-```bash
-git clone <repository-url>
-cd bergdotbet-admin
-```
+3. **Set up environment variables**
+   ```bash
+   DATABASE_URL=your_supabase_connection_string
+   NODE_ENV=development
+   ```
 
-2. ติดตั้ง dependencies:
-```bash
-npm install
-```
+4. **Run database migrations**
+   ```bash
+   npx drizzle-kit push
+   ```
 
-3. ตั้งค่า environment variables:
-```bash
-cp .env.example .env
-```
+5. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-4. แก้ไขไฟล์ `.env` และเพิ่มข้อมูลการเชื่อมต่อฐานข้อมูล:
-```
-DATABASE_URL=your_postgresql_connection_string
-```
+## Deployment
 
-5. รัน database migrations:
-```bash
-npm run db:push
-```
+### Railway Deployment
+1. Connect your GitHub repository to Railway
+2. Set environment variables:
+   - `DATABASE_URL`
+   - `NODE_ENV=production`
+3. Deploy automatically
 
-6. เริ่มต้น development server:
-```bash
-npm run dev
-```
+### Vercel Deployment
+1. Import project to Vercel
+2. Set environment variables
+3. Deploy with `npm run build`
 
-### การ Build สำหรับ Production
+## Default Accounts
 
-```bash
-npm run build
-npm start
-```
+### Admin Account
+- **Username**: `admin`
+- **Password**: `admin123`
+- **Role**: Administrator
 
-## โครงสร้างโปรเจค
-
-```
-├── client/                 # Frontend React application
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── pages/         # Page components
-│   │   ├── hooks/         # Custom React hooks
-│   │   └── lib/           # Utility functions
-├── server/                # Backend Express application
-│   ├── index.ts          # Main server file
-│   ├── routes.ts         # API routes
-│   └── storage.ts        # Database operations
-├── shared/               # Shared types and schemas
-│   └── schema.ts        # Database schema and types
-└── migrations/          # Database migrations
-```
-
-## การ Deploy บน Vercel
-
-1. เชื่อมต่อ GitHub repository กับ Vercel
-2. ตั้งค่า Environment Variables ใน Vercel Dashboard:
-   - `DATABASE_URL`: PostgreSQL connection string
-3. Deploy จะทำงานอัตโนมัติเมื่อ push ไปยัง main branch
-
-## Environment Variables
-
-| Variable | Description |
-|----------|-------------|
-| `DATABASE_URL` | PostgreSQL/Supabase connection string |
-| `NODE_ENV` | Environment (development/production) |
+### Demo Account
+- **Username**: `demo`
+- **Password**: `demo123`
+- **Role**: User
+- **Initial Credit**: 5,000 THB
 
 ## API Endpoints
 
 ### Authentication
-- `POST /api/login` - เข้าสู่ระบบ
-- `POST /api/register` - สมัครสมาชิก
-- `POST /api/logout` - ออกจากระบบ
+- `POST /api/auth/login` - User login
+- `POST /api/auth/register` - User registration
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - Logout
 
-### Admin Management
-- `GET /api/admin/stats` - สถิติแดชบอร์ด
-- `GET /api/admin/users` - รายชื่อผู้ใช้ทั้งหมด
-- `PUT /api/admin/users/:id/status` - อัพเดทสถานะผู้ใช้
+### Admin Dashboard
+- `GET /api/admin/dashboard-stats` - System statistics
+- `GET /api/admin/users` - User management
+- `PATCH /api/admin/users/:id/status` - Update user status
 
-### User Management
-- `GET /api/profile` - ข้อมูลโปรไฟล์
-- `GET /api/wallet` - ข้อมูลกระเป๋าเงิน
-- `POST /api/wallet/transfer` - โอนเครดิต
+### Credit System
+- `GET /api/wallet/:userId` - Get wallet balance
+- `POST /api/wallet/transfer` - Transfer credits
+- `GET /api/transactions/:userId` - Transaction history
 
-## การพัฒนา
+### Social Features
+- `GET /api/posts` - Get all posts
+- `POST /api/posts` - Create post
+- `POST /api/posts/:id/comments` - Add comment
+- `POST /api/posts/:id/like` - Like/dislike post
 
-### Code Style
-- ใช้ TypeScript สำหรับ type safety
-- ใช้ ESLint และ Prettier สำหรับ code formatting
-- ใช้ Conventional Commits สำหรับ commit messages
+## Database Schema
 
-### Database
-- ใช้ Drizzle ORM สำหรับ database operations
-- Database schema อยู่ใน `shared/schema.ts`
-- Migration files อยู่ใน `migrations/`
+The application uses 13 main tables:
+- `users` - User accounts and profiles
+- `credit_wallets` - Digital wallet system
+- `credit_transactions` - Financial transactions
+- `posts` - Social media posts
+- `comments` - Post comments
+- `post_likes` - Like/dislike system
+- `messages` - Chat messages
+- `login_logs` - Authentication logs
+- `loan_requests` - Credit loan applications
+- `shop_items` - Virtual store items
+- `user_items` - User inventory
+- `user_active_items` - Active item effects
+- `pets` - Virtual pet system
 
-## การสนับสนุน
+## Configuration Files
 
-หากพบปัญหาการใช้งาน กรุณาติดต่อทีมพัฒนา
+- `vercel.json` - Vercel deployment configuration
+- `railway.json` - Railway deployment configuration
+- `nixpacks.toml` - Nixpacks build configuration
+- `Dockerfile` - Container configuration
+- `drizzle.config.ts` - Database ORM configuration
+
+## Security Features
+
+- Password hashing with bcrypt
+- Session-based authentication
+- Input validation with Zod
+- SQL injection protection with Drizzle ORM
+- Environment variable protection
+
+## Monitoring & Logging
+
+- Request/response logging
+- Error handling middleware
+- Health check endpoints
+- Performance monitoring ready
+
+## Thai Language Support
+
+Complete Thai language interface including:
+- Admin panel in Thai
+- Error messages in Thai
+- User feedback in Thai
+- Number formatting for Thai Baht
 
 ## License
 
 MIT License
+
+## Support
+
+For deployment issues, check the deployment guides:
+- `RAILWAY_DEPLOYMENT_GUIDE.md`
+- `VERCEL_DEPLOYMENT_GUIDE.md`
+- `DEPLOYMENT_SECRETS.md` (for production setup)

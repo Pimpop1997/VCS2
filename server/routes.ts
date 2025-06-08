@@ -483,8 +483,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // เริ่มต้นเซิร์ฟเวอร์บนพอร์ต 5000
   const PORT = parseInt(process.env.PORT || '5000');
-  // เริ่มต้นเซิร์ฟเวอร์สำหรับ Railway และ development
-  if (process.env.RAILWAY_ENVIRONMENT || process.env.NODE_ENV !== 'production') {
+  // เริ่มต้นเซิร์ฟเวอร์สำหรับ Railway และ development - ต้อง listen ใน production ด้วย
+  if (process.env.RAILWAY_ENVIRONMENT || process.env.NODE_ENV !== 'production' || process.env.PORT) {
     httpServer.on('error', (err: any) => {
       if (err.code === 'EADDRINUSE') {
         console.log(`Port ${PORT} is already in use, trying port ${PORT + 1}`);

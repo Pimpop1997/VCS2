@@ -20,9 +20,14 @@
    ```
    DATABASE_URL=your_supabase_connection_string
    NODE_ENV=production
-   PORT=3000
    ```
-4. Railway จะ auto-deploy ทันที
+4. **Generate Domain** ในหน้า Settings > Networking
+5. Railway จะ auto-deploy และสร้าง public URL
+
+### หมายเหตุสำคัญ:
+- URL `*.railway.internal` เป็น internal URL ไม่สามารถเข้าถึงจากภายนอกได้
+- ต้องใช้ public domain ที่ Railway generate ให้ (แบบ `*.up.railway.app`)
+- หรือตั้งค่า custom domain ของตัวเอง
 
 ### 4. การตั้งค่าเพิ่มเติม
 - Build Command: `npm run build`

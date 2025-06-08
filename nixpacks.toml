@@ -8,7 +8,7 @@ cmds = ['npm ci']
 cmds = ['echo "Build completed - using simple deployment"']
 
 [start]
-cmd = 'node start.cjs'
+cmd = 'node app.cjs'
 
 [variables]
 NODE_ENV = 'production'

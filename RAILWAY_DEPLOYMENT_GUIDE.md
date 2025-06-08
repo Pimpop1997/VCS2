@@ -55,7 +55,14 @@
 
 ### 4. การตั้งค่าเพิ่มเติม
 - Build Command: `npm run build`
-- Start Command: `npm run start`
+- Start Command: `NODE_ENV=production tsx server/index.ts`
+
+### 5. การ Redeploy
+หากมีปัญหา 404 error:
+1. ไปที่ Deployments tab
+2. คลิก "Redeploy" ที่ deployment ล่าสุด
+3. รอ build และ deploy เสร็จ (2-3 นาที)
+4. ทดสอบ URL อีกครั้ง
 - Port: จะใช้ตัวแปร $PORT ที่ Railway กำหนดให้
 
 ### 5. ตรวจสอบการทำงาน

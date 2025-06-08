@@ -1,12 +1,18 @@
 #!/bin/bash
 
-echo "Building BergDotBet Admin Panel for Vercel..."
+echo "Building BergDotBet Admin Panel..."
 
 # Build frontend
 npm run build
 
-# Copy shared schema to dist
-mkdir -p dist/shared
-cp -r shared/* dist/shared/
+# สร้าง public directory สำหรับ static files
+mkdir -p public
+cp -r dist/* public/ 2>/dev/null || echo "No dist files to copy"
+
+# Copy shared schema
+mkdir -p dist/shared public/shared
+cp -r shared/* dist/shared/ 2>/dev/null || echo "No shared files"
+cp -r shared/* public/shared/ 2>/dev/null || echo "No shared files"
 
 echo "Build completed successfully!"
+echo "Frontend files ready in public/ directory"

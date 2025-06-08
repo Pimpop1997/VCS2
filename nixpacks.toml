@@ -2,16 +2,13 @@
 nixPkgs = ['nodejs-18_x', 'npm-9_x']
 
 [phases.install]
-cmds = [
-  'npm ci',
-  'npm run build'
-]
+cmds = ['npm ci']
 
 [phases.build]
-cmds = ['echo "Build completed"']
+cmds = ['npm run build']
 
 [start]
-cmd = 'NODE_ENV=production tsx server/index.ts'
+cmd = 'npm start'
 
 [variables]
 NODE_ENV = 'production'

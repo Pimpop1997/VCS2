@@ -5,10 +5,10 @@ nixPkgs = ['nodejs-18_x', 'npm-9_x']
 cmds = ['npm ci']
 
 [phases.build]
-cmds = ['node build-railway.js']
+cmds = ['echo "Build completed - using simple deployment"']
 
 [start]
-cmd = 'NODE_ENV=production tsx server/index.ts'
+cmd = 'node railway-start.js'
 
 [variables]
 NODE_ENV = 'production'

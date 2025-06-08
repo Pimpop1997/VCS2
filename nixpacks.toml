@@ -1,11 +1,17 @@
 [phases.setup]
-nixPkgs = ['nodejs_20']
+nixPkgs = ['nodejs-18_x', 'npm-9_x']
 
 [phases.install]
-cmd = 'npm ci'
+cmds = [
+  'npm ci',
+  'npm run build'
+]
 
 [phases.build]
-cmd = 'npm run build'
+cmds = ['echo "Build completed"']
 
 [start]
-cmd = 'NODE_ENV=production PORT=$PORT tsx server/index.ts'
+cmd = 'NODE_ENV=production tsx server/index.ts'
+
+[variables]
+NODE_ENV = 'production'

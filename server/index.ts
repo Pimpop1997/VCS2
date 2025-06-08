@@ -59,7 +59,57 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // Production static file serving
+    const path = await import("path");
+    const fs = await import("fs");
+    
+    const distPath = path.resolve("dist");
+    const publicPath = path.resolve("public");
+
+    // Serve built assets
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+    }
+    
+    if (fs.existsSync(publicPath)) {
+      app.use(express.static(publicPath));
+    }
+
+    // Fallback for SPA routing
+    app.get("*", (req, res) => {
+      if (req.path.startsWith("/api")) {
+        return res.status(404).json({ message: "API endpoint not found" });
+      }
+
+      const indexPath = path.resolve(distPath, "index.html");
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        // Basic admin panel fallback
+        res.status(200).send(`
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BergDotBet Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold text-center mb-6">BergDotBet Admin Panel</h1>
+      <div class="text-center">
+        <p class="mb-4">ระบบกำลังทำงาน</p>
+        <a href="/api/admin/dashboard-stats" class="text-blue-500 hover:underline">ทดสอบ API</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+        `);
+      }
+    });
   }
 })();
 
